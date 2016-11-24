@@ -12,7 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "Chrome": "chrome.sh && "
+    "Chrome": "chrome.sh && cucumber-js --"
   },
   "repository": {
     "type": "git",
