@@ -3,7 +3,7 @@ Setup Selenium WebdriverJS + CucumberJS + Chai on Windows
 
 
 
-Create a repository on Bitbucket or Github.
+1. Create a repository on Bitbucket or Github.
 go to https://bitbucket.org/ 
 create an account if you don’t have one
 create a new repository and name it as you wish
@@ -15,7 +15,7 @@ git clone https://LaszloKiss@bitbucket.org/LaszloKiss/webdriver.git
 
 
 
-Clone the repository locally
+2. Clone the repository locally
 open the Windows Command Prompt or GitBash(recommended)
 GitBash is a prettier version and you can download it from https://git-scm.com/download/win
 from GitBash go to the folder where you want to setup your testing environment: if you have a “Testing” folder in D:, just use the following command: cd D:/Testing
@@ -24,7 +24,7 @@ if your Gitbash is pointing to the desired folder, paste the git clone command t
 
 
 
-Download and Install Atom text editor
+3. Download and Install Atom text editor
 https://atom.io/
 Open Atom
 Open your Testing Folder in Atom (File > Add Project Folder)
@@ -39,17 +39,21 @@ cucumber (0.5.0)
 
 
 
-Install node JS
+4. Install node JS
 Download and install node JS - https://nodejs.org/en/download/
 Restart the PC for Node to be available
 
 
 
 
-Create package.json file
+5. Create package.json file
 Open GitBash, go to your Testing folder and type “npm init” to create a package.json file in the directory. This file will display your installed dependencies and test run commands
 Just follow the installation steps and write all the info that is required. An example file would look like this: (dependencies will be added only after you install the packages)
 
+
+
+```
+#!javascript
 
 {
   "name": "webdriver_automation",
@@ -80,18 +84,20 @@ Just follow the installation steps and write all the info that is required. An e
   "homepage": "https://bitbucket.org/LaszloKiss/webdriver#readme"
 }
 
+```
+
 
 	
 
 
-Install Selenium WebdriverJS
+6. Install Selenium WebdriverJS
 If you’re in the desired folder in GitBash, use the following command to install selenium webdriver
 “npm install selenium-webdriver --save”
 
 
 
 
-Install Chromedriver
+7. Install Chromedriver
 When selenium is finished, install the following packages the same way:
 “npm install chromedriver --save“
 download chromedriver and copy it to C:/Windows folder
@@ -100,26 +106,26 @@ https://sites.google.com/a/chromium.org/chromedriver/downloads
 
 
 
-Install CucumberJS
+8. Install CucumberJS
 “npm install cucumber --save”
 
 
 
 
-Install Chai Mocha
+9. Install Chai Mocha
 “npm install chai --save” 
 
 
 
 
-Install sanitize-filename
+10. Install sanitize-filename
 “npm install sanitize-filename --save”
 If everything was installed correctly, your dependencies in package.json should look similar to the example above
 
 
 
 
-Create folders
+11. Create folders
 Open Atom and create the following folders:
 right click on your “Testing” directory > New Folder > name it “features”. In this folder, you will store all your .feature files
 under “features” create 2 folders : “support” & “step_definitions” In the step_definitions folder you will store all your -steps.js files
@@ -129,9 +135,13 @@ under “features” create 2 folders : “support” & “step_definitions” I
 
 
 
-Add world.js and hooks.js in the support folder
+12. Add world.js and hooks.js in the support folder
 in the “support” folder create a new file named “world.js” and paste the following code inside:
 
+
+
+```
+#!javascript
 
 var fs = require( "fs" );
 var webdriver = require( "selenium-webdriver" );
@@ -223,11 +233,17 @@ var World = function World( callback ) {
 module.exports.World = World;
 module.exports.getDriver = getDriver;
 
+```
+
 
 in the “support” folder create a new file named “hooks.js” and copy the following code inside:
 
 
 
+
+
+```
+#!javascript
 
 var driver = require( "./world.js" ).getDriver();
 var fs = require( "fs" );
@@ -264,10 +280,12 @@ var myHooks = function() {
 
 module.exports = myHooks;
 
+```
 
 
 
-Create a “.gitignore” file in the main directory
+
+13. Create a “.gitignore” file in the main directory
 everything included in this file will be ignored when a push is made to Bitbucket
 To ignore files or folders that shouldn’t be pushed to bitbucket, just copy the following lines inside the “.gitignore” file:
 node_modules
@@ -280,7 +298,7 @@ debug.log
 
 
 
- Change the test execution command
+14. Change the test execution command
 In the package.json file, the “scrips” object defines how you can run your tests. You can add several test commands here.
 for now, to run the test on Chrome browser, write the following command: 
 	"scripts": {
@@ -296,7 +314,7 @@ npm run Chrome  features/specifictest.feature (to run only test named “specifi
 
 
 
-Add environment variables (might be optional)
+15. Add environment variables (might be optional)
 At first skip this step and see if everything works. If it doesn’t, return to this step!
 Go to PC > Properties > Advanced System Settings > Advanced > Environment Variables… > System variables > find “Path” > Edit
 you should at least see nodeJS available here
@@ -308,7 +326,7 @@ click on New and add paths for Cucumber, Chromedriver, or other drivers that you
 
 
 
-Create your first test 
+16. Create your first test 
 inside the “features” folder create a file named “facebook.feature” and add the following code:
 
 
@@ -321,6 +339,10 @@ Feature: Open facebook
 
 inside the “step_definitions” folder create a file named “facebook-steps.js” and add the following code:
 
+
+
+```
+#!javascript
 
 var expect = require( "chai" ).expect;
 var until = require( "selenium-webdriver" ).until;
@@ -338,11 +360,13 @@ module.exports = function() {
   });
 
 };
+```
 
 
 
 
-Check if the test is properly working:
+
+17. Check if the test is properly working:
 Open GitBash, go to your “Testing” directory and run the test execution command: “npm run Chrome”
 if everything is ok, you should see a new chrome browser opening and accessing the Facebook homepage
 if the test is passed, you can push everything to Bitbucket, for the setup to be saved. Make sure that you are in the “Testing” directory in GitBash and type the following commands:
@@ -354,16 +378,7 @@ git push origin master (this will push your commit(s) to Bitbucket on the master
 
 
 
-Now that the setup is done, all you need to do next is to create your own test and run them. Documentation on the installed packages can be found on the following links:
+18. Now that the setup is done, all you need to do next is to create your own test and run them. Documentation on the installed packages can be found on the following links:
 https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs
 https://github.com/cucumber/cucumber-js
 http://chaijs.com/api/bdd/
-
-
-
-
-
-
-
-
-
