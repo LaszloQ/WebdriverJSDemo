@@ -29,22 +29,19 @@ var buildIEDriver = function() {
 };
 
 switch ( platform ) {
-    // case "ANDROID":
-    //     var driver = buildAndroidDriver();
-    //     break;
-    case "FIREFOX":
+    case "firefox":
         var driver = buildFirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
         // driver.manage().window().setSize( 1920, 1080 )
         break;
-    case "SAFARI":
+    case "safari":
         var driver = buildSafariDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
         // driver.manage().window().setSize( 1920, 1080 )
         break;
-    case "IE":
+    case "ie":
         var driver = buildIEDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
@@ -52,9 +49,9 @@ switch ( platform ) {
         break;
     default:
         var driver = buildChromeDriver();
-        driver.manage().window().maximize();
+      //  driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
-        // driver.manage().window().setSize( 1920, 1080 )
+        driver.manage().window().setSize( 1050, 948 )
 }
 
 var getDriver = function() {
@@ -82,21 +79,42 @@ var World = function World( callback ) {
         }, waitTimeout );
     };
 
-    this.findXpath = function(path) {
+    findXpath = function(path) {
       return driver.findElement(webdriver.By.xpath(path));
     };
 
-    this.findXpaths = function(path) {
+    findXpaths = function(path) {
       return driver.findElements(webdriver.By.xpath(path));
     };
 
-    this.waitElement = function(path, time, msg) {
+    waitElement = function(path, time, msg) {
       return driver.wait(until.elementLocated(webdriver.By.xpath(path)), time, msg )
     };
 
-    this.waitElements = function(path, time, msg) {
+    waitElements = function(path, time, msg) {
       return driver.wait(until.elementsLocated(webdriver.By.xpath(path)), time, msg )
     };
+
+    waitElementToBeVisible = function(path, time, msg) {
+      return driver.wait(until.elementIsVisible(driver.findElement(webdriver.By.xpath(path))), time, msg )
+    };
+
+    waitElementToNotBeVisible = function(path) {
+      return driver.wait(until.elementIsNotVisible(driver.findElement(webdriver.By.xpath(path))))
+    }
+
+    waitElementToBeLocatedAndVisible = function (path, time, msg) {
+      return driver.wait(until.elementIsVisible(driver.wait(until.elementLocated(webdriver.By.xpath(path)), time, msg )), time, msg)
+    }
+
+    waitTitle = function (title, timeout) {
+      return driver.wait(until.titleIs(title), timeout)
+    }
+
+    waitText = function(path, text, timeout) {
+      return driver.wait(until.elementTextIs(findXpath(path), text), timeout)
+
+    }
 
 
     // callback();
