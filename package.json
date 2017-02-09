@@ -12,11 +12,11 @@
   },
   "devDependencies": {},
   "scripts": {
-    "Chrome": "chrome.sh && cucumber-js --"
+    "Chrome": "set SELENIUM_BROWSER=chrome && cucumber-js --"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://LaszloKiss@bitbucket.org/LaszloKiss/webdriver.git"
+    "url": "https://LaszloKiss@bitbucket.org/LaszloKiss/webdriver.git"
   },
   "keywords": [
     "webdriver",

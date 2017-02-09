@@ -49,9 +49,9 @@ switch ( platform ) {
         break;
     default:
         var driver = buildChromeDriver();
-      //  driver.manage().window().maximize();
+        driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
-        driver.manage().window().setSize( 1050, 948 )
+        //driver.manage().window().setSize( 1050, 948 )
 }
 
 var getDriver = function() {

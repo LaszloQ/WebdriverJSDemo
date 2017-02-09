@@ -1,1 +1,0 @@
-set SELENIUM_BROWSER=chrome
