@@ -1,23 +1,19 @@
 var expect = require( "chai" ).expect;
 var until = require( "selenium-webdriver" ).until;
+var driver = require( "../support/world.js" ).getDriver();
 
 module.exports = function( driver ) {
   this.World = require( "../support/world.js" ).World;
 
 
   this.When(/^the (.*) page is opened$/, function( page, next ) {
-    var driver = this.driver;
-
     if ( page === "home" ) {
-      driver.get(baseUrl);
+      this.driver.get(baseUrl);
     } else {
-      driver.get(baseUrl + page)
+      this.driver.get(baseUrl + page)
     }
-    driver.getCurrentUrl()
-      .then(function(url){
-        expect(url).to.contain(baseUrl);
-      })
-      .then( function() {
+    this.driver.sleep(1000)
+      .then( function( ) {
         next();
       });
   });
