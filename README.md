@@ -4,7 +4,7 @@ Setup Selenium WebdriverJS + CucumberJS + Chai on Windows
 
 
 1. Create a repository on Bitbucket or Github.
-go to https://bitbucket.org/ 
+go to https://bitbucket.org/
 create an account if you don’t have one
 create a new repository and name it as you wish
 enter the repository and click on “Clone” button. you will have two options available: HTTPS or SSH. Leave it on HTTPS and copy the link, which should looks something like this:
@@ -87,7 +87,7 @@ Just follow the installation steps and write all the info that is required. An e
 ```
 
 
-	
+
 
 
 6. Install Selenium WebdriverJS
@@ -113,7 +113,7 @@ https://sites.google.com/a/chromium.org/chromedriver/downloads
 
 
 9. Install Chai Mocha
-“npm install chai --save” 
+“npm install chai --save”
 
 
 
@@ -300,7 +300,7 @@ debug.log
 
 14. Change the test execution command
 In the package.json file, the “scrips” object defines how you can run your tests. You can add several test commands here.
-for now, to run the test on Chrome browser, write the following command: 
+for now, to run the test on Chrome browser, write the following command:
 	"scripts": {
     		"Chrome": "chrome.sh && cucumber-js --"
  	 },
@@ -319,14 +319,14 @@ At first skip this step and see if everything works. If it doesn’t, return to 
 Go to PC > Properties > Advanced System Settings > Advanced > Environment Variables… > System variables > find “Path” > Edit
 you should at least see nodeJS available here
 click on New and add paths for Cucumber, Chromedriver, or other drivers that you’ll be using
-	
 
 
 
 
 
 
-16. Create your first test 
+
+16. Create your first test
 inside the “features” folder create a file named “facebook.feature” and add the following code:
 
 
