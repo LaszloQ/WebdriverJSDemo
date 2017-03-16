@@ -1,63 +1,65 @@
 var expect = require( "chai" ).expect;
 var until = require( "selenium-webdriver" ).until;
 var driver = require( "../support/world.js" ).getDriver();
+var baseUrl = require( "../support/helper_functions.js" ).baseUrl;
+var date = new Date();
 
-module.exports = function( driver ) {
+module.exports = function( ) {
   this.World = require( "../support/world.js" ).World;
 
 
-  this.When(/^the (.*) page is opened$/, function( page, next ) {
-    if ( page === "home" ) {
-      this.driver.get(baseUrl);
+  this.When(/^the (.*) page is opened$/, function( path ) {
+    if ( path === "home" ) {
+      return driver.get( baseUrl( ) );
     } else {
-      this.driver.get(baseUrl + page)
+      return driver.get( baseUrl( path ) )
     }
-    this.driver.sleep(1000)
-      .then( function( ) {
-        next();
-      });
   });
 
 
-  this.Then(/^the (.*) is clicked$/, function(element, next) {
-    waitElementToBeLocatedAndVisible( eval(element), 5000, element + " missing").click()
-      .then(function() {
-        next();
-      });
+  this.Then(/^the (.*) is clicked$/, function( element ) {
+    return waitElementToBeLocatedAndVisible( eval(element), 5000, element + " missing" ).click( );
   });
 
 
-  this.Then(/^the (.*) should be visible$/, function( element, next ) {
-    waitElementToBeLocatedAndVisible( eval(element), 5000, element + " missing" )
-      .then( function() {
-        next();
-      });
+  this.Then(/^the (.*) should be visible$/, function( element ) {
+    return waitElementToBeLocatedAndVisible( eval( element ), 5000, element + " missing" );
   });
 
 
-  this.Then(/^today should be highlighted$/, function( next ) {
-    var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var date = new Date();
-    var day = date.getDate();
+  this.Then(/^the calendar should display the current month$/, function( ) {
+    var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
-    findXpath( month ).getText()   //making sure that the month is correct on the datepicker
+    return findXpath( datepickerMonth ).getText( )
       .then( function( result ) {
-        expect( result ).to.equal( months[ date.getMonth() ] )
-      })
-    findXpath( year ).getText()  // making sure that the year is correct on the datepicker
+        expect( result ).to.equal( months[ date.getMonth( ) ] )
+      });
+  });
+
+
+  this.Then(/^the calendar should display the current year$/, function ( ) {
+    return findXpath( datePickerYear ).getText()
       .then( function( result ) {
-        expect( Number(result) ).to.equal( date.getFullYear() )
-      })
-    findXpaths( highlightedDaysInCalendar )  //making sure that there is only 1 highlighted day in the calendar
-      .then( function( listOfHighlightedDates ) {
-      })
-    findXpath( "//td/a[.='" + day  +"']" ).getAttribute( 'class' )  //we are searching for the table data which includes our day and checking if it's highlighted
+        expect( Number( result ) ).to.equal( date.getFullYear( ) )
+      });
+  });
+
+
+  this.Then(/^one day is highlighted$/, function( ) {
+    return findXpaths( DatepickerHighlightedDays )
+      .then( function( result ) {
+        expect( result.length ).to.equal( 1 );
+      });
+  });
+
+
+  this.Then(/^the highlighted day should be today$/, function( ) {
+    var day = date.getDate( );
+
+    return findXpath( "//td/a[.='" + day  +"']" ).getAttribute( 'class' )  //we are searching for the table data which is today and checking if it's highlighted
       .then( function( result ){
         expect( result ).to.contain( "highlight" )
       })
-      .then( function() {
-        next();
-      });
   });
 
 };

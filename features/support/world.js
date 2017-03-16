@@ -39,19 +39,16 @@ switch ( platform ) {
         var driver = buildSafariDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
-        // driver.manage().window().setSize( 1920, 1080 )
         break;
     case "ie":
         var driver = buildIEDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
-        // driver.manage().window().setSize( 1920, 1080 )
         break;
     default:
         var driver = buildChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout( 15000 );
-        //driver.manage().window().setSize( 1050, 948 )
 }
 
 var getDriver = function() {
@@ -113,11 +110,8 @@ var World = function World( callback ) {
 
     waitText = function(path, text, timeout) {
       return driver.wait(until.elementTextIs(findXpath(path), text), timeout)
-
     }
 
-
-    // callback();
 };
 
 module.exports.World = World;

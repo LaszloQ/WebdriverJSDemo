@@ -1,3 +1,7 @@
+function baseUrl( path ) {
+  return "http://demoqa.com" + path
+}
+
 function today() {
   var d = new Date();
   var n = d.getDate();
@@ -7,5 +11,6 @@ function today() {
 }
 
 module.exports = {
-  today
+  today,
+  baseUrl
 }

@@ -5,12 +5,6 @@ var sanitize = require( "sanitize-filename" );
 
 var myHooks = function() {
 
-    // this.Before( function(scenario, callback) {
-    //
-    //   .then(function(){
-    //     callback();
-    //   });
-    // });
 
     this.After( function( scenario, callback ) {
         // if ( scenario.isFailed() ) {          //takes a screenshot on failed scenarios
@@ -29,9 +23,8 @@ var myHooks = function() {
             } );
     } );
 
-    this.registerHandler( "AfterFeatures", function( event, callback ) {
-        driver.quit();
-        callback();
+    this.registerHandler( "AfterFeatures", function( event ) {
+      return driver.quit();
     } );
 
     this.setDefaultTimeout( 60 * 1000 ); // removes the default timeout
