@@ -1,4 +1,5 @@
 var fs = require( "fs" );
+var expect = require( "chai" ).expect;
 var webdriver = require( "selenium-webdriver" );
 var platform = process.env.PLATFORM || "chrome";
 var until = require( "selenium-webdriver" ).until;
@@ -98,19 +99,26 @@ var World = function World( callback ) {
 
     waitElementToNotBeVisible = function(path) {
       return driver.wait(until.elementIsNotVisible(driver.findElement(webdriver.By.xpath(path))))
-    }
+    };
 
     waitElementToBeLocatedAndVisible = function (path, time, msg) {
       return driver.wait(until.elementIsVisible(driver.wait(until.elementLocated(webdriver.By.xpath(path)), time, msg )), time, msg)
-    }
+    };
 
     waitTitle = function (title, timeout) {
       return driver.wait(until.titleIs(title), timeout)
-    }
+    };
 
     waitText = function(path, text, timeout) {
       return driver.wait(until.elementTextIs(findXpath(path), text), timeout)
-    }
+    };
+
+    expectTextToEqual = function( path, text) {
+      waitElementToBeLocatedAndVisible( path, 5000, path + " not found" ).getText()
+        .then(function( result ){
+          expect( result ).to.equal( text );
+        })
+    };
 
 };
 

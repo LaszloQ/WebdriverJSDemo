@@ -30,10 +30,7 @@ module.exports = function( ) {
   this.Then(/^the calendar should display the current month$/, function( ) {
     var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
-    return findXpath( datepickerMonth ).getText( )
-      .then( function( result ) {
-        expect( result ).to.equal( months[ date.getMonth( ) ] )
-      });
+    return expectTextToEqual( datepickerMonth, months[ date.getMonth() ] );
   });
 
 
