@@ -7,6 +7,10 @@ var myHooks = function() {
 
 
     this.After( function( scenario, callback ) {
+      this.driver.manage().deleteAllCookies()
+        .then( function() {
+          callback();
+        } );
       if ( scenario.isFailed() ) {          //takes a screenshot on failed scenarios
         this.driver.takeScreenshot().then( function( data ) {
           var base64Data = data.replace( /^data:image\/png;base64,/, "" );
@@ -17,10 +21,6 @@ var myHooks = function() {
             } );
           } );
       }
-      this.driver.manage().deleteAllCookies()
-        .then( function() {
-          callback();
-        } );
     } );
 
     this.registerHandler( "AfterFeatures", function( ) {

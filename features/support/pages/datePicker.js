@@ -1,7 +1,11 @@
 
+var datePicker = {
 
-    datePicker = "//a[.='Datepicker']";
-    datePickerInput = "//input[@name='selected_date']";
-    datepickerMonth = "//span[@class='ui-datepicker-month']";
-    datePickerYear = "//span[@class='ui-datepicker-year']";
-    DatepickerHighlightedDays = "//td/a[contains(@class,'highlight')]";
+  Input: "//input[@name='selected_date']",
+  Month: "//span[@class='ui-datepicker-month']",
+  Year: "//span[@class='ui-datepicker-year']",
+  HighlightedDays: "//td/a[contains(@class,'highlight')]",
+
+}
+
+module.exports = datePicker;

@@ -2,6 +2,7 @@ var expect = require( "chai" ).expect;
 var until = require( "selenium-webdriver" ).until;
 var driver = require( "../support/world.js" ).getDriver();
 var baseUrl = require( "../support/helper_functions.js" ).baseUrl;
+var datePicker = require( "../support/pages/datePicker" );
 var date = new Date();
 
 module.exports = function( ) {
@@ -30,12 +31,12 @@ module.exports = function( ) {
   this.Then(/^the calendar should display the current month$/, function( ) {
     var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
-    return expectTextToEqual( datepickerMonth, months[ date.getMonth() ] );
+    return expectTextToEqual( datePicker.Month, months[ date.getMonth() ] );
   });
 
 
   this.Then(/^the calendar should display the current year$/, function ( ) {
-    return findXpath( datePickerYear ).getText()
+    return findXpath( datePicker.Year ).getText()
       .then( function( result ) {
         expect( Number( result ) ).to.equal( date.getFullYear( ) )
       });
@@ -43,7 +44,7 @@ module.exports = function( ) {
 
 
   this.Then(/^one day is highlighted$/, function( ) {
-    return findXpaths( DatepickerHighlightedDays )
+    return findXpaths( datePicker.HighlightedDays )
       .then( function( result ) {
         expect( result.length ).to.equal( 1 );
       });
