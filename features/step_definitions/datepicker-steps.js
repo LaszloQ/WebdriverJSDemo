@@ -1,4 +1,5 @@
 var expect = require( "chai" ).expect;
+var selenium = require( "../support/custom_methods" );
 var until = require( "selenium-webdriver" ).until;
 var driver = require( "../support/world.js" ).getDriver();
 var baseUrl = require( "../support/helper_functions.js" ).baseUrl;
@@ -11,15 +12,15 @@ module.exports = function( ) {
 
   this.When(/^the (.*) page is opened$/, function( path ) {
     if ( path === "home" ) {
-      return driver.get( baseUrl( ) );
+       return driver.get( baseUrl( ) )
     } else {
-      return driver.get( baseUrl( path ) )
+       return driver.get( baseUrl( path ) )
     }
-  });
+  })
 
 
   this.Then(/^the (.*) is clicked$/, function( element ) {
-    return waitElementToBeLocatedAndVisible( eval(element), 5000, element + " missing" ).click( );
+    return selenium.click( element );
   });
 
 

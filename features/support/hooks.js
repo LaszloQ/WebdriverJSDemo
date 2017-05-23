@@ -6,11 +6,7 @@ var sanitize = require( "sanitize-filename" );
 var myHooks = function() {
 
 
-    this.After( function( scenario, callback ) {
-      this.driver.manage().deleteAllCookies()
-        .then( function() {
-          callback();
-        } );
+    this.After( function( scenario ) {
       if ( scenario.isFailed() ) {          //takes a screenshot on failed scenarios
         this.driver.takeScreenshot().then( function( data ) {
           var base64Data = data.replace( /^data:image\/png;base64,/, "" );
@@ -21,6 +17,7 @@ var myHooks = function() {
             } );
           } );
       }
+      return this.driver.manage().deleteAllCookies()
     } );
 
     this.registerHandler( "AfterFeatures", function( ) {
