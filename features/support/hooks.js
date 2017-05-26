@@ -21,7 +21,7 @@ var myHooks = function() {
     } );
 
     this.registerHandler( "AfterFeatures", function( ) {
-      return driver.quit();
+      //return driver.quit();
     } );
 
     this.setDefaultTimeout( 60 * 1000 ); // removes the default timeout
