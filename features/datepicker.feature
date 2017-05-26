@@ -1,7 +1,7 @@
 Feature: Date picker
 
   Scenario: Making sure that the current day is highlighted on the datepicker
-    Given the /datepicker/ page is opened
+    Given http://demoqa.com/datepicker/ url is opened
     When the datePicker.Input is clicked
     Then the datePicker.Month should be visible
     And the calendar should display the current month

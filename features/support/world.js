@@ -113,12 +113,6 @@ var World = function World( callback ) {
       return driver.wait(until.elementTextIs(findXpath(path), text), timeout)
     };
 
-    expectTextToEqual = function( path, text) {
-      waitElementToBeLocatedAndVisible( path, 5000, path + " not found" ).getText()
-        .then(function( result ){
-          expect( result ).to.equal( text );
-        })
-    };
 
 };
 
